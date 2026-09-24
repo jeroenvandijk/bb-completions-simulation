@@ -1,0 +1,34 @@
+{:paths ["test"]
+ :deps {io.github.jeroenvandijk/bb-completions-simulation {:local/root "."}}
+ :min-bb-version "1.13.222" ;; For proper autocomplete
+ 
+ :tasks 
+ {
+   
+   simulate-completions {:doc "Simulate bb completions"
+                         :cmd jeroenvandijk.bb.completions-simulation/tree
+                       }
+   ;; valid
+   valid-task {:task (println "task")}
+   valid-exec {:exec clojure.core/println}
+   valid-exec-fn {:exec-fn clojure.core/println}
+   valid-fn {:fn clojure.core/println}
+ 
+   ;; invalid
+   invalid-empty {} ;; empty
+   invalid-exec {:exec fooooo}
+  
+   invalid-exec-no-resolve {:exec clojure.core/println2}
+   invalid-exec-fn-no-resolve {:exec-fn clojure.core/println2}
+   invalid-fn-no-resolve {:fn clojure.core/println2}
+    
+   invalid-form-empty-list {:task ()}
+   invalid-form-wrong-type {:task 1}
+   
+   
+   invalid-tree {:cmd cli/invalid-tree}
+   valid-tree {:cmd cli/valid-tree}
+   invalid-tree-single-branch {:cmd cli/invalid-tree-single-branch}
+ }
+}
+
